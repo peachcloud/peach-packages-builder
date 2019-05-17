@@ -1,0 +1,1 @@
+curl --data-binary "@test/fixtures/packages_push.json" -H "X-Hub-Signature: sha1:$(cat test/fixtures/packages_push.json | openssl dgst -sha1 -hmac "arst" | sed -e 's/^.* //')" -H "Content-Type: application/json" -H "X-GitHub-Event: push" http://localhost:3000
