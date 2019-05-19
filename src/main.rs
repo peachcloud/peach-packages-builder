@@ -32,10 +32,8 @@ fn main() {
     let mut handler = Constructor::new();
     let hook = Hook::new("*", Some(SECRET.to_string()), |delivery: &Delivery| {
         if let Some(payload) = &delivery.payload {
-            if payload["repository"]["full_name"] == "peachcloud/peach-packages"
-                && payload["ref"] == "refs/heads/release"
-            {
-                info!("Packages are released, running build process");
+            if payload["ref"] == "refs/heads/release" {
+                info!("New package is released, running build process");
                 if let Err(error) = run() {
                     error!("{}", error)
                 }
